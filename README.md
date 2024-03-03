@@ -240,6 +240,33 @@ If you want to use multi-modal models:
 pip install modelscope[multi-modal]
 ```
 
+### If you want build modelscope from source
+
+Require CUDA 12.1, torch 2.2.0
+```shell
+pip install torch==2.2.0 torchvision==0.17.0 torchaudio==2.2.0 --index-url https://download.pytorch.org/whl/cu121
+```
+
+If you don't have xformers
+```shell
+pip install -U xformers --no-deps -qq
+```
+Install requirements
+```shell
+git clone https://github.com/trongnk2106/modelscope.git
+%cd modelscope
+!pip install -r requirements.txt
+
+```
+
+## Usage
+
+If you want to run pipeline Text2Video with pipeline Text2Video -> Video2Video. Please run [t2v_enhance_pipeline.py](t2v_enhance_pipeline.py)
+
+
+
+
+
 If you want to use nlp models:
 ```shell
 pip install modelscope[nlp] -f https://modelscope.oss-cn-beijing.aliyuncs.com/releases/repo.html

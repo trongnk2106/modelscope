@@ -150,7 +150,8 @@ class TextToVideoSynthesis(Model):
         # synthesis
         with torch.no_grad():
             num_sample = 1  # here let b = 1
-            max_frames = self.config.model.model_args.max_frames
+            # max_frames = self.config.model.model_args.max_frames
+            max_frames = input['max_frames']
             latent_h, latent_w = input['out_height'] // 8, input[
                 'out_width'] // 8
             with amp.autocast(enabled=True):

@@ -55,11 +55,13 @@ class TextToVideoSynthesisPipeline(Pipeline):
             self.model.clip_encoder.to('cpu')
         out_height = input['height'] if 'height' in input else 256
         out_width = input['width'] if 'height' in input else 256
+        max_frames = input['max_frames'] if 'max_frames' in input else 16
         return {
             'text_emb': text_emb,
             'text_emb_zero': text_emb_zero,
             'out_height': out_height,
-            'out_width': out_width
+            'out_width': out_width,
+            'max_frames': max_frames
         }
 
     def forward(self, input: Dict[str, Any],

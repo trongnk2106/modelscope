@@ -20,3 +20,9 @@ sortedcontainers>=1.5.9
 tqdm>=4.64.0
 urllib3>=1.26
 yapf
+fairscale
+rotary_embedding_torch
+torchsde
+open_clip_torch
+pytorch-lightning
+av
