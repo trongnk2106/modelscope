@@ -56,6 +56,7 @@ class TextToVideoSynthesisPipeline(Pipeline):
         out_height = input['height'] if 'height' in input else 256
         out_width = input['width'] if 'height' in input else 256
         max_frames = input['max_frames'] if 'max_frames' in input else 16
+        self.fps = input['fps'] if 'fps' in input else 8
         return {
             'text_emb': text_emb,
             'text_emb_zero': text_emb_zero,
@@ -86,7 +87,7 @@ class TextToVideoSynthesisPipeline(Pipeline):
         torchvision.io.write_video(
             output_video_path,
             imgs_tensor,
-            fps=8,
+            fps=self.fps,
             video_codec='h264',
             options={'crf': '10'})
         if temp_video_file:

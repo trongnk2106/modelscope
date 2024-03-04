@@ -66,6 +66,7 @@ class TextToVideoSynthesis(Model):
         cfg['temporal_attention'] = True if cfg[
             'temporal_attention'] == 'True' else False
 
+        num_timestep = kwargs.get('num_timestep', 1000)
         # Initialize unet
         self.sd_model = UNetSD(
             in_dim=cfg['unet_in_dim'],
@@ -90,7 +91,8 @@ class TextToVideoSynthesis(Model):
         # Initialize diffusion
         betas = beta_schedule(
             'linear_sd',
-            cfg['num_timesteps'],
+            # cfg['num_timesteps'],
+            num_timestep,
             init_beta=0.00085,
             last_beta=0.0120)
         self.diffusion = GaussianDiffusion(

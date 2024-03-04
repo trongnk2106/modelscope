@@ -76,8 +76,10 @@ class VideoToVideo(TorchModel):
 
         # assign default value
         cfg.batch_size = self.config.model.model_cfg.batch_size
-        cfg.target_fps = self.config.model.model_cfg.target_fps
-        cfg.max_frames = self.config.model.model_cfg.max_frames
+        # cfg.target_fps = self.config.model.model_cfg.target_fps
+        cfg.target_fps = kwargs.get('target_fps', 8)
+        cfg.max_frames = kwargs.get('max_frames', 16)
+        # cfg.max_frames = self.config.model.model_cfg.max_frames
         cfg.latent_hei = self.config.model.model_cfg.latent_hei
         cfg.latent_wid = self.config.model.model_cfg.latent_wid
         cfg.model_path = osp.join(model_dir,
@@ -115,11 +117,13 @@ class VideoToVideo(TorchModel):
         self.generator = generator.half()
         logger.info('Load model {} path {}, with local status {}'.format(
             cfg.UNet.type, cfg.model_path, ret))
-
+        
+        num_timestep = kwargs.get('num_timestep', 1000)
+        
         # [diffusion]
         sigmas = noise_schedule(
             schedule='logsnr_cosine_interp',
-            n=1000,
+            n=num_timestep,
             zero_terminal_snr=True,
             scale_min=2.0,
             scale_max=4.0)
